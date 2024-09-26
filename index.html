@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezerwacja Salki Konferencyjnej</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rezerwacja Salki Konferencyjnej</h1>
+
+    <form id="reservationForm">
+        <label for="date">Data:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="start-time">Godzina początkowa:</label>
+        <input type="time" id="start-time" name="start-time" required>
+
+        <label for="end-time">Godzina końcowa:</label>
+        <input type="time" id="end-time" name="end-time" required>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="dostepna">Dostępna</option>
+            <option value="zajeta">Zajęta</option>
+        </select>
+
+        <label for="name">Osoba rezerwująca:</label>
+        <input type="text" id="name" name="name" required>
+
+        <input type="submit" value="Zarezerwuj">
+    </form>
+
+    <table id="reservationTable">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Godzina początkowa</th>
+                <th>Godzina końcowa</th>
+                <th>Status</th>
+                <th>Osoba rezerwująca</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Tutaj zostaną dodane wpisy -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('reservationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Pobieranie wartości z formularza
+            const date = document.getElementById('date').value;
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+            const status = document.getElementById('status').value;
+            const name = document.getElementById('name').value;
+
+            // Tworzenie nowego wiersza w tabeli
+            const table = document.getElementById('reservationTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            const dateCell = newRow.insertCell(0);
+            const startTimeCell = newRow.insertCell(1);
+            const endTimeCell = newRow.insertCell(2);
+            const statusCell = newRow.insertCell(3);
+            const nameCell = newRow.insertCell(4);
+
+            dateCell.innerHTML = date;
+            startTimeCell.innerHTML = startTime;
+            endTimeCell.innerHTML = endTime;
+            statusCell.innerHTML = status === 'dostepna' ? 'Dostępna' : 'Zajęta';
+            nameCell.innerHTML = name;
+
+            // Resetowanie formularza
+            document.getElementById('reservationForm').reset();
+        });
+    </script>
+
+</body>
+</html>
